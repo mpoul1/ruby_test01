@@ -1,27 +1,41 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Meetings</h1>
-
-<table>
-  <thead>
+<h2 class="sub-header">Meetings</h2>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
     <tr>
-      <th>Starts on</th>
-      <th colspan="3"></th>
+      <th>Action Items</th>
+      <th>Starts On</th>
+      <th>Commands</th>
+      <th>Commands</th>
+      <th><%= link_to 'New Meeting', new_meeting_path, class: "btn btn-primary" %></th>
     </tr>
-  </thead>
-
-  <tbody>
+    </thead>
+    <tbody>
     <% @meetings.each do |meeting| %>
       <tr>
+        <td>
+          <ul>
+            <% meeting.action_items.each do |action| %>
+              <li>
+                <%= action.title + " " + action.description %>
+              </li>
+            <% end %>
+          </ul>
+        </td>
         <td><%= meeting.starts_on %></td>
-        <td><%= link_to 'Show', meeting %></td>
-        <td><%= link_to 'Edit', edit_meeting_path(meeting) %></td>
-        <td><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to 'Show', meeting, class: "btn btn-default" %>
+          </td>
+        <td><%= link_to 'Edit', edit_meeting_path(meeting), class: "btn btn-default" %></td>
+        <td><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
       </tr>
     <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+
+</div>
+</div>
 
 <br>
 
-<%= link_to 'New Meeting', new_meeting_path %>
